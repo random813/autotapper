@@ -293,9 +293,9 @@ class OverlayController(private val context: Context) : MarkerView.Listener {
     }
 
     private fun select(marker: MarkerView?) {
-        selected?.selected = false
+        selected?.markerSelected = false
         selected = marker
-        marker?.selected = true
+        marker?.markerSelected = true
         if (marker == null) hideToolbar() else showToolbar()
         hideNudgePad(); hideEditor()
     }

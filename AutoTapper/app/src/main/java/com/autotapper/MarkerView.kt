@@ -57,7 +57,7 @@ class MarkerView(
     }
 
     var radiusPx: Int = (48 * resources.displayMetrics.density).toInt()
-    var selected: Boolean = false
+    var markerSelected: Boolean = false
         set(value) { field = value; invalidate() }
 
     private val density = resources.displayMetrics.density
@@ -90,7 +90,7 @@ class MarkerView(
         val cy = height / 2f
         val r = radiusPx.toFloat()
         val accent = if (point.locked) 0xFFFFA000.toInt()
-            else if (selected) 0xFF29B6F6.toInt() else 0xFF90CAF9.toInt()
+            else if (markerSelected) 0xFF29B6F6.toInt() else 0xFF90CAF9.toInt()
 
         if (isCrosshair) {
             // Crosshair: exact aim pixel, no randomness.
@@ -114,7 +114,7 @@ class MarkerView(
         canvas.drawCircle(cx, cy, dotR, dotPaint)
 
         // Resize handle at 45° on the rim (only when selected and not locked).
-        if (selected && !point.locked) {
+        if (markerSelected && !point.locked) {
             val hx = cx + handleOffset()
             val hy = cy + handleOffset()
             handlePaint.color = accent
@@ -155,7 +155,7 @@ class MarkerView(
                 moved = false
                 val hx = width / 2f + handleOffset()
                 val hy = height / 2f + handleOffset()
-                onHandle = selected && !point.locked &&
+                onHandle = markerSelected && !point.locked &&
                     hypot(event.x - hx, event.y - hy) < 22 * density
                 return true
             }

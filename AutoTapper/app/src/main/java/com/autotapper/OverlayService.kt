@@ -53,7 +53,7 @@ class OverlayService : Service() {
     private fun startAsForeground() {
         val nm = getSystemService(NotificationManager::class.java)
         if (Build.VERSION.SDK_INT >= 26) {
-            nm.createNotificationChannel(
+            nm?.createNotificationChannel(
                 NotificationChannel(
                     CHANNEL_ID, "Floating controls", NotificationManager.IMPORTANCE_MIN
                 )
